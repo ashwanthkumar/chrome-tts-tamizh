@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+  "name": "Tamil TTS Engine",
+  "description": "Chrome Tamil TTS Engine powered by SSN Speech Lab",
+  "version": "1.0",
+  "permissions": ["ttsEngine"],
+  "tts_engine": {
+    "voices": [
+      {
+        "voice_name": "Radhae",
+        "lang": "ta-IN",
+        "gender": "female",
+        "event_types": ["start", "marker", "end"]
+      },
+      {
+        "voice_name": "Krishna",
+        "lang": "ta-IN",
+        "event_types": ["start", "end"]
+      }
+    ]
+  },
+  "background": {
+    "scripts": ["engine.js"]
+  },
+  "icons": { 
+    "128": "icons/128.png",
+    "64": "icons/64.png",
+    "16": "icons/16.png"
+  }
+}
