@@ -1,4 +1,6 @@
 .DS_Store
 plugin.zip
 Archive.zip
+*.crx
+*.pem
 
