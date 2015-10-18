@@ -7,6 +7,6 @@ We've the first version of the plugin on the [Chrome Store](https://chrome.googl
 
 ## TODOs
 - [ ] Implement server side caching support for same texts
-- [ ] Look for converting WAV to MP3 (to save space and bandwidth)
+- [x] Look for converting WAV to MP3 (to save space and bandwidth)
 - [ ] Add support for languages from [DONLAB](http://www.iitm.ac.in/donlab/hts/)
 - [ ] Implement the same TTS Engine for Android
