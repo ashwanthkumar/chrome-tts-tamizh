@@ -5,21 +5,20 @@
 */
 var TTS_SERVER = "http://labs.ashwanthkumar.in/tts-tamil/";
 
-var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-var voice; // ref to stop the
+var audio; // ref to stop the
 var speakListener = function(utterance, options, sendTtsEvent) {
   var gender = "hts_tamil_" + (options.gender || "female");
   // var ttsServiceUrl = TTS_SERVER + "?gender=hts_tamil_" + gender + "&text=" + encodeURIComponent(utterance);
   console.debug("Synthesizing the text for speech");
   $.post(TTS_SERVER, {"gender" : gender, "text": utterance}, function(response) {
     console.debug(response);
-    speakBuffered(response.url, utterance, sendTtsEvent);
+    speakFromAudio(response.url, utterance, sendTtsEvent);
   });
 };
 
 var stopSpeaking = function() {
-  if(voice) {
-    voice.stop();
+  if(audio) {
+    audio.pause();
   }
   console.debug("Stopped speaking");
 };
@@ -46,41 +45,16 @@ function speak(gender) {
   }
 }
 
-function speakBuffered(url, utterance, sendTtsEvent) {
-  var loader = new AudioSampleLoader();
-  loader.ctx = audioCtx;
-  loader.src = url;
-  loader.onload = function () {
-    console.debug("I'm speaking - " + utterance);
-
-    sendTtsEvent({'type': 'start', 'charIndex': 0});
-    voice = audioCtx.createBufferSource();
-    voice.buffer = loader.response;
-    voice.connect(audioCtx.destination);
-    voice.onended = function() {
-      sendTtsEvent({'type': 'end', 'charIndex': utterance.length});
-      console.debug("Finished speaking");
-    }
-    console.debug("Started speaking");
-    voice.start();
-  };
-  loader.send();
-}
-
-// FIXME - This is a WIP
 function speakFromAudio(url, utterance, sendTtsEvent) {
-  // mySound = new Audio
   console.debug("Started speaking");
   console.debug("I'm speaking - " + utterance);
 
   sendTtsEvent({'type': 'start', 'charIndex': 0});
-  var audio = new Audio(url)
-  audio.volume = 1;
-  voice = audioCtx.createMediaElementSource(audio);
-  voice.onended = function() {
+  audio = new Audio();
+  audio.src = url;
+  audio.addEventListener('ended', function() {
     sendTtsEvent({'type': 'end', 'charIndex': utterance.length});
     console.debug("Finished speaking");
-  }
-  voice.connect(audioCtx.destination);
-  // voice.start();
+  });
+  audio.play();
 }
