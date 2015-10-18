@@ -3,6 +3,7 @@ require_once("functions.php");
 
 define("TTS_URL", "http://speech.ssn.edu.in/synthesise.php");
 define("DOWNLOAD_URL", "http://speech.ssn.edu.in/wav/");
+define("MP3_CONVERTOR", "http://labs.ashwanthkumar.in/ffmpeg/");
 
 $gender = $_POST['gender'];
 $text = $_POST['text'];
@@ -31,7 +32,7 @@ $headers = get_headers_from_curl_response($response);
 
 $contentLength = $headers["Content-Length"];
 parse_str(parse_url($headers["Location"], PHP_URL_QUERY));
-$audioLink = DOWNLOAD_URL . $name;
+$audioLink = MP3_CONVERTOR . "?stream=true&url=" . urlencode(DOWNLOAD_URL . $name);
 $result = array("url" => $audioLink, "debug" => array(
                 "response" => $response,
                 "gender" => $gender,
