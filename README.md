@@ -1,5 +1,5 @@
 # Tamil TTS Engine (Wrapper)
-Chrome Extension that adds `ta-IN` TTS Engine powered by [SSN Speech Lab](http://www.ssn.edu.in/Speech_Lab/Speech_home.html)'s [Tamil Speech Synthesizer](http://www.ssn.edu.in/Speech_Lab/tts_demo.html).
+Chrome Extension that adds `ta-IN` TTS Engine powered by [SSN Speech Lab](http://speech.ssn.edu.in)'s [Tamil Speech Synthesizer](http://speech.ssn.edu.in/SpeechSynthesis/index.html).
 
 ## TTS Engine Specification
 - Language - `ta-IN`
